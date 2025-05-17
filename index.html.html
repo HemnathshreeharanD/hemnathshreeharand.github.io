@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hemnath Shreeharan D - Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;400&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7f5af0;
+      --secondary: #00c6fb;
+      --accent: #232946;
+      --background: #16161a;
+      --glass-bg: rgba(35, 41, 70, 0.7);
+      --glass-blur: blur(18px);
+      --text: #fffffe;
+      --subtitle: #b8c1ec;
+      --card-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      --neu-shadow: 8px 8px 16px #141516, -8px -8px 16px #232526;
+      --transition: 0.3s cubic-bezier(.4,2,.6,1);
+      --header-clip: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+      --section-gap: 36px;
+      --gradient: linear-gradient(90deg, #7f5af0 0%, #00c6fb 100%);
+    }
+    [data-theme="light"] {
+      --primary: #7f5af0;
+      --secondary: #00c6fb;
+      --accent: #eaeaea;
+      --background: #f4f4f4;
+      --glass-bg: rgba(255,255,255,0.85);
+      --text: #232946;
+      --subtitle: #5f6c7b;
+    }
+    html, body {
+      min-height: 100%;
+      margin: 0;
+      background: var(--background);
+      color: var(--text);
+      font-family: 'Roboto', Arial, sans-serif;
+      scroll-behavior: smooth;
+    }
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      scroll-snap-type: y proximity;
+    }
+    header {
+      position: relative;
+      background: var(--gradient);
+      color: var(--text);
+      padding: 60px 0 40px 0;
+      text-align: center;
+      clip-path: var(--header-clip);
+      box-shadow: var(--card-shadow);
+      font-family: 'Montserrat', sans-serif;
+      animation: headerClip 1.2s cubic-bezier(.4,2,.6,1);
+    }
+    @keyframes headerClip {
+      0% { clip-path: polygon(0 0, 100% 0, 100% 0, 0 0); }
+      100% { clip-path: var(--header-clip); }
+    }
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 32px rgba(127,90,240,0.18);
+      border: 4px solid var(--secondary);
+      filter: grayscale(0.1) brightness(1.1);
+      background: #fff;
+      transition: border-color var(--transition), filter var(--transition), transform var(--transition);
+      cursor: zoom-in;
+    }
+    .profile-img:hover {
+      border-color: #fff;
+      filter: brightness(1.2) blur(0px);
+      transform: scale(1.07);
+    }
+    .theme-toggle {
+      position: absolute;
+      top: 24px;
+      right: 36px;
+      background: var(--glass-bg);
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      box-shadow: var(--neu-shadow);
+      transition: background var(--transition), box-shadow var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+      z-index: 10;
+    }
+    .theme-toggle svg {
+      width: 26px;
+      height: 26px;
+      fill: var(--primary);
+      transition: fill var(--transition);
+    }
+    .theme-toggle:active {
+      box-shadow: 0 2px 8px var(--primary);
+    }
+    .social-links {
+      margin-top: 18px;
+      margin-bottom: 0;
+    }
+    .social-links a {
+      margin: 0 10px;
+      color: var(--secondary);
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.15em;
+      transition: color var(--transition), text-shadow var(--transition);
+      text-shadow: 0 2px 8px rgba(127,199,255,0.2);
+    }
+    .social-links a:hover {
+      color: #fff;
+      text-shadow: 0 4px 16px var(--primary);
+      filter: drop-shadow(0 2px 8px var(--primary));
+    }
+    nav {
+      background: var(--glass-bg);
+      padding: 16px 0 10px 0;
+      text-align: center;
+      border-bottom: 1px solid var(--accent);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      scroll-snap-align: start;
+      backdrop-filter: blur(8px);
+      transition: background var(--transition);
+    }
+    nav a {
+      margin: 0 18px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+      letter-spacing: 1px;
+      font-size: 1.05em;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 3px;
+      transition: color var(--transition), border-bottom var(--transition);
+      position: relative;
+    }
+    nav a.active, nav a:hover {
+      color: #fff;
+      border-bottom: 2px solid var(--primary);
+    }
+    main {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--section-gap);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 36px 18px 64px 18px;
+      flex: 1;
+    }
+    section {
+      background: var(--glass-bg);
+      box-shadow: var(--neu-shadow);
+      border-radius: 20px;
+      padding: 36px 32px;
+      margin-bottom: 0;
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      scroll-snap-align: start;
+      transition: background var(--transition), box-shadow var(--transition);
+      position: relative;
+      overflow: hidden;
+      animation: fadeIn 1.2s cubic-bezier(.4,2,.6,1);
+    }
+    section:hover {
+      box-shadow: 0 8px 32px var(--primary), var(--neu-shadow);
+      background: rgba(35,41,70,0.92);
+    }
+    @keyframes fadeIn {
+      0% { opacity: 0; transform: translateY(40px);}
+      100% { opacity: 1; transform: translateY(0);}
+    }
+    h2 {
+      color: var(--primary);
+      margin-top: 0;
+      margin-bottom: 18px;
+      font-size: 1.7em;
+      letter-spacing: 1px;
+      font-family: 'Montserrat', sans-serif;
+      position: relative;
+      z-index: 2;
+    }
+    h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), transparent);
+      border-radius: 4px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+      transition: width var(--transition);
+    }
+    section:hover h2::after {
+      width: 100px;
+    }
+    .subtitle {
+      color: var(--subtitle);
+      font-size: 1.1em;
+      margin-bottom: 1.5em;
+    }
+    ul, .skills-list, .tech-list {
+      padding-left: 20px;
+      margin: 0 0 10px 0;
+    }
+    .skills-list, .tech-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+    }
+    .skills-list li, .tech-list li {
+      background: rgba(127,90,240,0.13);
+      border: 1px solid var(--primary);
+      color: var(--primary);
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1em;
+      box-shadow: 2px 2px 8px #161718, -2px -2px 8px #232526;
+      transition: background var(--transition), color var(--transition), box-shadow var(--transition), transform var(--transition);
+      cursor: pointer;
+      text-align: center;
+      user-select: none;
+      font-family: 'Roboto', Arial, sans-serif;
+    }
+    .skills-list li:hover, .tech-list li:hover {
+      background: var(--primary);
+      color: var(--accent);
+      box-shadow: 0 4px 16px var(--primary), var(--neu-shadow);
+      transform: translateY(-3px) scale(1.07);
+    }
+    .project-card {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 20px;
+      align-items: center;
+      background: rgba(255,255,255,0.03);
+      border-radius: 16px;
+      box-shadow: var(--neu-shadow);
+      margin-bottom: 18px;
+      padding: 18px;
+      transition: box-shadow var(--transition), background var(--transition), transform var(--transition);
+      overflow: hidden;
+      position: relative;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 32px var(--primary), var(--neu-shadow);
+      background: rgba(127,90,240,0.08);
+      transform: scale(1.02);
+    }
+    .project-img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 14px;
+      filter: brightness(1.2) blur(0.5px) grayscale(0.2);
+      border: 3px solid var(--primary);
+      background: #fff;
+      transition: filter var(--transition), border-color var(--transition);
+    }
+    .project-card:hover .project-img {
+      filter: brightness(1.3) blur(0px);
+      border-color: #fff;
+    }
+    .project-title {
+      font-weight: bold;
+      color: #fff;
+      font-size: 1.15em;
+      margin-bottom: 4px;
+      font-family: 'Montserrat', sans-serif;
+    }
+    .contact-info a {
+      color: var(--primary);
+      text-decoration: none;
+      word-break: break-all;
+      transition: color var(--transition);
+    }
+    .contact-info a:hover {
+      color: #fff;
+    }
+    /* Modal styles for enlarged profile image */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: auto;
+      background: rgba(20, 24, 34, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-items: center;
+      justify-content: center;
+      animation: fadeInModal 0.4s;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .modal-content {
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    .modal-img {
+      max-width: 350px;
+      max-height: 70vh;
+      width: 90vw;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(127,90,240,0.28);
+      border: 6px solid var(--primary);
+      background: #fff;
+      animation: zoomIn 0.4s;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.7);}
+      to { transform: scale(1);}
+    }
+    .close-modal {
+      position: absolute;
+      top: -16px;
+      right: -16px;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 2px 8px var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+      z-index: 10;
+    }
+    .close-modal:hover {
+      background: var(--secondary);
+    }
+    @media (max-width: 700px) {
+      main { padding: 16px 2vw; }
+      section { padding: 18px 6px; }
+      .project-card { grid-template-columns: 1fr; gap: 10px; }
+      .project-img { width: 80px; height: 80px; }
+      .modal-img { max-width: 95vw; }
+    }
+    ::-webkit-scrollbar {
+      width: 8px;
+      background: var(--background);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary);
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body data-theme="dark">
+  <header>
+    <button class="theme-toggle" title="Toggle dark/light mode" onclick="toggleTheme()">
+      <svg id="theme-icon" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="6"/>
+      </svg>
+    </button>
+    <!-- Profile Image with click event -->
+    <img class="profile-img" id="profileImg" src="images/Hemnath_passportsize_photo-removebg-preview.png" alt="" />
+    <h1 style="margin-bottom: 0;">Hemnath Shreeharan D</h1>
+    <p class="subtitle">Python Developer | Web Developer | Problem Solver</p>
+    <div class="social-links">
+      <a href="https://github.com/HemnathshreeharanD" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/hemnath-shreeharan-d" target="_blank">LinkedIn</a>
+      <a href="https://leetcode.com/profile/" target="_blank">LeetCode</a>
+      <a href="https://www.hackerrank.com/profile/hemnathshreehar1" target="_blank">HackerRank</a>
+    </div>
+  </header>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#project">Project</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <main>
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Passionate Python Developer with a strong foundation in programming, MySQL, web development, and databases. Skilled in writing clean, efficient code and solving complex problems. Eager to apply my skills in a dynamic environment and grow as a developer.
+      </p>
+    </section>
+    <section id="education">
+      <h2>Education</h2>
+      <ul>
+        <li>
+          <strong>B.E. Computer Science and Engineering</strong><br>
+          Saveetha School of Engineering<br>
+          <span class="subtitle">CGPA: 7.35 | 2020-2024</span>
+        </li>
+        <li>
+          <strong>12th - State Board</strong><br>
+          Holy Cross Matric Higher Secondary School<br>
+          <span class="subtitle">Percentage: 51% | 2020</span>
+        </li>
+        <li>
+          <strong>10th - State Board</strong><br>
+          Holy Cross Matric Higher Secondary School<br>
+          <span class="subtitle">Percentage: 70.1% | 2018</span>
+        </li>
+      </ul>
+    </section>
+    <section id="skills">
+      <h2>Skills</h2>
+      <h4 style="margin-bottom: 8px;">Programming Languages</h4>
+      <ul class="skills-list">
+        <li>Python</li>
+        <li>MySQL</li>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+      </ul>
+      <h4 style="margin-bottom: 8px;">Technical Skills</h4>
+      <ul class="tech-list">
+        <li>GIT</li>
+        <li>GitHub</li>
+        <li>Git Bash</li>
+        <li>MS 360</li>
+        <li>Figma</li>
+        <li>AWS</li>
+      </ul>
+    </section>
+    <section id="project">
+      <h2>Project</h2>
+      <div class="project-card">
+        <img class="project-img" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?fit=crop&w=400&q=80" alt="Project" />
+        <div>
+          <div class="project-title">Improving Efficiency, Scalability, Accuracy, and Reliability Over Cost and Performance Gains in SMEs</div>
+          <p>
+            Conducted comparative analysis using the Message-Digest 5 (MD5) Algorithm, El Gamal Algorithm, RSA Algorithm, Advanced Encryption Standard (AES) Algorithm, and Digital Signature Algorithm (DSA) to enhance efficiency in SMEs.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section id="certifications">
+      <h2>Certifications</h2>
+      <ul>
+        <li>Cybersecurity Fundamentals from IBM-SkillsBuild </li>
+        <li>PCEP-Python Programmer from OpenEDG Python Institute</li>
+        <li>Workshop associated with IIT Madras for AI and ML with Data Science (Offline)</li>
+        <li>Certificate in Great Learning for Front End Development – HTML and CSS</li>
+      </ul>
+    </section>
+    <section id="achievements">
+      <h2>Achievements & Conferences</h2>
+      <ul>
+        <li>Publication: "Artificial intelligence-driven sustainability: Enhancing carbon capture for sustainable development goals"</li>
+        <li>Publication: "Micro-Hydro Systems: Empowering Rural Communities with Small-Scale Solutions"</li>
+        <li>Publication: "Catalyzing Healthcare Innovation: Harnessing AI for Advanced Medical Diagnosis and Treatment" (Communicated)</li>
+        <li>Performed in CAMBRIDGE LINGUASKILL ENGLISH EXAM and achieved B+ grade at Saveetha School of Engineering, Saveetha University (2022)</li>
+        <li>International Conference: ICETAS-2024 Paper presentation titled “Improving Efficiency Over Cost and Performance Gains in Small and Medium-sized Enterprises (SMEs) using Message-Digest 5 Algorithm In comparison with El Gamal Algorithm” at University of Bahrain</li>
+      </ul>
+    </section>
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <p><strong>Phone:</strong> <a href="tel:+918056708462">+91 80567 08462</a></p>
+        <p><strong>Email:</strong> <a href="mailto:hemnathshreeharan20@gmail.com">hemnathshreeharan20@gmail.com</a></p>
+        <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/hemnath-shreeharan-d" target="_blank">linkedin.com/in/hemnath-shreeharan-d</a></p>
+        <p><strong>GitHub:</strong> <a href="https://github.com/HemnathshreeharanD" target="_blank">github.com/HemnathshreeharanD</a></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal for Enlarged Profile Image -->
+  <div id="profileModal" class="modal" onclick="closeModal(event)">
+    <div class="modal-content">
+      <button class="close-modal" onclick="closeModal(event)" aria-label="Close">&times;</button>
+      <img class="modal-img" src="https://avatars.githubusercontent.com/u/121187799?v=4" alt="Profile Large" />
+    </div>
+  </div>
+
+  <script>
+    // Dark/Light mode toggle with CSS variables animation
+    function toggleTheme() {
+      const body = document.body;
+      const icon = document.getElementById('theme-icon');
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.setAttribute('data-theme', 'light');
+        icon.innerHTML = '<rect x="4" y="4" width="16" height="16" rx="4"/>';
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        icon.innerHTML = '<circle cx="12" cy="12" r="6"/>';
+      }
+    }
+    // Scroll snap: highlight nav links
+    document.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('main > section');
+      const navLinks = document.querySelectorAll('nav a');
+      let index = sections.length;
+      while(--index && window.scrollY + 80 < sections[index].offsetTop) {}
+      navLinks.forEach((link) => link.classList.remove('active'));
+      navLinks[index].classList.add('active');
+    });
+
+    // Modal logic for profile image
+    const profileImg = document.getElementById('profileImg');
+    const profileModal = document.getElementById('profileModal');
+
+    profileImg.addEventListener('click', function() {
+      profileModal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeModal(event) {
+      // Only close if clicked on overlay or close button
+      if (event.target === profileModal || event.target.classList.contains('close-modal')) {
+        profileModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        profileModal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
+</body>
+</html>
